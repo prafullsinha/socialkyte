@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+ <body style="background-color: #e8f3f7 ; color:#10684b">
+    <div class="col=6">
+        <div class="Container" style="width:70%; background-color:#fff; border-radius:15px; padding-left: 50px; padding-right: 50px; padding-top:50px; margin-top: 50px; margin-bottom:50px; padding-bottom:50px">
+                {% if user.is_authenticated %}
+                    <h3 style="color:#043a39">Welcome to User Data Manager</h3><br><br>
+                    <h5 style="color:#043a39">Files Uploaded by {{ user.first_name }}</h5>
+                     <p>(click on file id to see its data)</p>
+                    {% for f in form %}
+                        <a href="/detail/{{ f.id }}">{{ f.id }}</a>
+                    {% endfor %}
+                    <br><br>
+                    <h5 style="margin-bottom:0px"> Upload CSV File</h5><br>
+                    <form action="{% url 'user_data:index' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" title="Upload excel file" name="excel_file" style="border: 1px solid black; padding: 5px;" required="required">
+                        <p>
+                            <input type="submit" value="Upload" class="btn btn-primary" style="background-color:#204a49;color:#e8f3f7;border-color: #204a49;border-radius: 5px; padding:5px; margin-top:15px; cursor: pointer;">
+                    </form>
+
+                {% else %}
+                    <h3>Signup/Login for User Data Manager</h3>
+                    <ul>
+                        <li>A user can upload multiple CSV files.</li>
+                        <li>All files data get saved in database.</li>
+                        <li>User can perform different queries on the data saved.</li>
+                    </ul>
+                {% endif %}
+        </div>
+    </div>
+</body>
+{% endblock %}

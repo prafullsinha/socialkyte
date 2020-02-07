@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+ <body style="background-color: #e8f3f7; color:#10684b">
+    <div class="col=6">
+        <hr>
+        <h4 style="color:#043a39">Users with followers > 2000 , authenticity > 10 and cost < 5000:</h4>
+       <br>
+        <table style="width:100%">
+            <tr>
+                <th style="padding-bottom:35px">Username</th>
+                <th style="padding-bottom:35px">Social_platform</th>
+                <th style="padding-bottom:35px">Media</th>
+                <th style="padding-bottom:35px">Followers</th>
+                <th style="padding-bottom:35px">Engagement</th>
+                <th style="padding-bottom:35px">Authenticity</th>
+                <th style="padding-bottom:35px">Price_per_pic</th>
+                <th style="padding-bottom:35px">Cost_per_engagement</th>
+            </tr>
+
+        {% for row in excel_data %}
+            {% if row.followers > 2000 and row.authenticity > 10 and row.price_per_pic_post < 5000 %}
+                 <tr>
+                    <td style="padding-bottom:15px">{{ row.username }}</td>
+                    <td style="padding-bottom:15px">{{ row.social_platform }}</td>
+                    <td style="padding-bottom:15px">{{ row.media }}</td>
+                    <td style="padding-bottom:15px">{{ row.followers }}</td>
+                    <td style="padding-bottom:15px">{{ row.engagement }}</td>
+                    <td style="padding-bottom:15px">{{ row.authenticity }}</td>
+                    <td style="padding-bottom:15px">{{ row.price_per_pic_post }}</td>
+                    <td style="padding-bottom:15px">{{ row.cost_per_engagement }}</td>
+                </tr>
+            {% endif %}
+
+        {% endfor %}
+
+        </table>
+    </div>
+</body>
+{% endblock %}
